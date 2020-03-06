@@ -63,7 +63,10 @@ public:
         ForEachChannel(ch)
         {
             if (Changed(ch)) eg[ch].SetScale((ch ? HEMISPHERE_3V_CV : HEMISPHERE_MAX_CV) - In(ch));
-            if (Clock(ch, 1)) eg[ch].Start(); // Use physical-only clocking
+            if (Clock(ch, 1)){
+                eg[ch].Start(); // Use physical-only clocking
+                if (ch == 0) bass.Reset();
+            }
         }
 
         // Calculate bass drum signal
